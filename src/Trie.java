@@ -76,6 +76,31 @@ public class Trie {
 //        wolverhampton university management in engineering
     }
 
+    public int countWords() {
+        int count = 0;
+
+        if (root == null)
+            return count;
+
+        return countWords(root, count);
+    }
+
+    private int countWords(Node root, int count) {
+        for (Node child : root.getChildren()) {
+            if (child == null)
+                return count;
+            if (child.isEndOfWord) {
+                count += 1;
+            }
+
+            System.out.println(child.value + " : " +  count);
+
+            count = countWords(child, count);
+        }
+
+        return count;
+    }
+
     public boolean containsRecursive(String word) {
         if (word == null)
             return false;
